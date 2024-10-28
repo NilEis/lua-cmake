@@ -22,6 +22,7 @@ if (SUPPORT_CLANGD)
     set(CLANGD_SRC ${CMAKE_CURRENT_SOURCE_DIR}/cmake/.clangd.in)
     set(CLANGD_DEST ${CMAKE_CURRENT_SOURCE_DIR}/.clangd)
     if (EMSCRIPTEN)
+    add_custom_target(create_compile_commands ALL)
         set(CMAKE_EXPORT_COMPILE_COMMANDS OFF)
         set(CMAKE_EXPORT_COMPILE_COMMANDS
                 OFF
@@ -43,7 +44,7 @@ if (SUPPORT_CLANGD)
                         "-MJ ${CMAKE_CURRENT_BINARY_DIR}/compile_commands/compile_commands_${s_name}.json"
                 )
                 set_property(
-                        TARGET ${PROJECT_NAME}
+                        GLOBAL
                         APPEND
                         PROPERTY
                         ADDITIONAL_CLEAN_FILES
@@ -52,7 +53,7 @@ if (SUPPORT_CLANGD)
             endforeach ()
         endforeach ()
         add_custom_command(
-                TARGET ${PROJECT_NAME}
+                TARGET create_compile_commands
                 POST_BUILD
                 COMMAND
                 ${CMAKE_COMMAND}
