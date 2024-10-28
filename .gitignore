@@ -18,3 +18,4 @@ lua
 .clangd
 build/
 *build*/
+.idea/
