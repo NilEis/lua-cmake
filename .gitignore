@@ -13,3 +13,7 @@ testes/libs/all
 
 temp
 lua
+
+.vscode/
+.clangd
+build/
